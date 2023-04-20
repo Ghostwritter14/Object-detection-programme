@@ -1,0 +1,2 @@
+# What is this project about 
+This project is a small scale computer vision project. It uses the computer camera to detect an object send an email to the owner that something appeared within its vision radius. It uses a lot of machine learning algorithms. The project utilises opencv as the main library for computer vision algorithms. 
