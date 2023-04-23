@@ -8,6 +8,7 @@ Receiver = "sohamtestport@gmail.com"
 
 
 def send_email(image_path):
+    print("email function has started")
     email_message = EmailMessage()
     email_message["Subject"] = "New person detected"
     email_message.set_content("Hey there is something that came in my radius of vision !")
@@ -25,6 +26,7 @@ def send_email(image_path):
     gmail.login(Sender, password)
     gmail.sendmail(Sender, Receiver, email_message.as_string())
     gmail.quit()
+    print("email sent successfully")
 
 
 if __name__ == "__main__":

@@ -46,7 +46,7 @@ while True:
 
     # drawing the boundary for detection
     for contour in contours:
-        if cv2.contourArea(contour) < 10000:
+        if cv2.contourArea(contour) < 5000:
             continue
         x, y, w, h = cv2.boundingRect(contour)
         rectangle_detector = cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
@@ -68,12 +68,12 @@ while True:
     if status_list[0] == 1 and status_list[1] == 0:
         # Introduced threading to reduce memory usage
         # thread1 represents sending the email and thread2 cleaning the folder after email has been sent)
-        thread1 = Thread(target=send_email, args=(detected_object_image,))
-        thread1.daemon = True
-        thread2 = Thread(target=clean_folder)
-        thread2.daemon = True
+        email_thread = Thread(target=send_email, args=(detected_object_image, ))
+        email_thread.daemon = True
+        clean_thread = Thread(target=clean_folder)
+        clean_thread.daemon = True
 
-        thread1.start()
+        email_thread.start()
 
     # visualising the video
     cv2.imshow("Video", frame)
@@ -84,6 +84,7 @@ while True:
     # quit key for the programme
     if key == ord("q"):
         break
-thread2.start()
+
 video.release()
 
+clean_thread.start()
